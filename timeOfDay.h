@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <iomanip>
 namespace JeongYoonha2449101
 
 {
@@ -123,8 +124,12 @@ namespace JeongYoonha2449101
     
         friend std::ostream& operator<<(std::ostream& os, const timeOfDay& t)
         {   //print(std::cout) --> os, t. 
-            if(t.hour < 10) os <<"0"; os << t.hour << ":";
-            if(t.minute < 10) os <<"0"; os << t.minute;
+            //if(t.hour < 10) os <<"0"; 
+            os.width(2); os.fill('0');
+            os << t.hour << ":";
+            os << std::setw(2) << std::setfill('0') <<t.minute;
+            //if(t.minute < 10) os <<"0"; 
+        
             
             return os;
         }
