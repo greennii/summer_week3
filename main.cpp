@@ -2,6 +2,10 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include "alarm.h"
+#include <sstream> 
+
+
 namespace JeongYoonha2449101
 {
     void printTimeArrayVector(const std::vector<timeArray>& v)
@@ -15,43 +19,86 @@ namespace JeongYoonha2449101
     {
         std::vector<timeOfDay> v;
         timeOfDay t;
-        //fin >> t;
+        
+        std::streambuf* origBuf{ std::cout.rdbuf()};
+        std::cout.rdbuf(nullptr);
        
-        while (fin >> t)
+        while (fin >> t) //t is timeOfDay's input dustkswk
             v.push_back(t);
+        std::cout.rdbuf(origBuf);
+
 
         for (const auto& vi : v)
-            fout << vi << '\n';
+            fout << /*timeofday's print dustkswk*/ vi << '\n';
     }
+
+    //std::iostream -> std::stringstream
+    //                  s
+
+    void parsingAlarm(std::iostream& io)
+    {
+        alarm a;
+        io >> a; //alarm's input dustkswk
+        
+        std::streambuf* origBuf{std::cout.rdbuf()};
+        
+        std::cout.rdbuf(nullptr);
+        
+        std::cout.rdbuf(origBuf);
+
+        io.clear();
+        io.seekp(0, std::ios::end);
+
+        io << a;
+
+
+    }
+
+
 }
+
 int main()
 {
 
     using namespace JeongYoonha2449101;
 
-    std::ifstream fin{"timeData.txt"};
-
-    if( fin.fail())
+    
+    
+    std::stringstream ss;
+    std::string alarmData{"morning\n7 0\n1\n"};
+    ss <<alarmData;
+    parsingAlarm(ss);
+    std::cout <<ss.str() << '\n';
+   
+    std::fstream fs{"alarmData.txt"};
+    if(!fs)
     {
         std::cout << "Input file opening failed\n";
         std::exit(1);
     }
+    parsingAlarm(fs);
 
-    std::ofstream fout;
-    std::string filename;
-    std::cout << "Enter the file name: ";
-    std::cin >> filename;
-    fout.open(filename + ".txt");
+    // if( fin.fail())
+    // {
+    //     std::cout << "Input file opening failed\n";
+    //     std::exit(1);
+    // }
 
-    if (!fout)
-    {
-        std::cout << "Outfile opening failed\n";
-        std::exit(1);
-    }
-    readWriteTimeFile(fin, fout);
+    // std::ofstream fout;
+    // std::string filename;
+    // std::cout << "Enter the file name: ";
+    // std::cin >> filename;
+    // fout.open(filename + ".txt");
 
-    fin.close();
-    fout.close();
+    // if (!fout)
+    // {
+    //     std::cout << "Outfile opening failed\n";
+    //     std::exit(1);
+    // }
+    // readWriteTimeFile(fin, fout);
+
+    // fin.close();
+    // fout.close();
 
     // timeOfDay t;
     // fin >> t;

@@ -19,7 +19,7 @@ namespace JeongYoonha2449101
     void print() const
     {
        std::cout << name << " " ;
-        wakeTime.print(); //hour:minute
+        wakeTime.print(); //timeOfDay's print()
        std::cout << " alarm is " << ((inActive) ? "on" : "off") << std::endl;
        
     }
@@ -27,7 +27,7 @@ namespace JeongYoonha2449101
     {
         
         os << a.name << " ";
-        os << a.wakeTime;
+        os << a.wakeTime; //timeOfDay's output dustkswk
         os << " alarm is " << ((a.inActive) ? "on" : "off") << "\n";
         
         
@@ -48,7 +48,7 @@ namespace JeongYoonha2449101
     { //std::cin --> is
         std::cout << "Enter alarm name: ";
         std::getline(is >> std::ws, a.name);
-        is >> a.wakeTime;
+        is >> a.wakeTime;  //timeofDay's input dustkswk
         std::cout << "Enter 1 or 0 (on/off): ";
         is >> a.inActive;
            //friend part if timeOfDay is added

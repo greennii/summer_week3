@@ -46,10 +46,11 @@ namespace JeongYoonha2449101
 
         void setHour( int hourValue) {hour = hourValue; testHour();}
         void setMinute(int minuteValue) { minute = minuteValue; testMinute();}
-        void print() const
+        void print(std::ostream& os = std::cout) const
+    
         {
-            if(hour < 10) std::cout <<"0"; std::cout << hour << ":";
-            if(minute < 10) std::cout <<"0"; std::cout << minute;
+            os << std::setw(2) <<std::setfill('0') << hour << ':';
+            os << std::setw(2) <<std::setfill('0') << minute << ':';
         }
         int getHour() const 
         {
@@ -123,14 +124,10 @@ namespace JeongYoonha2449101
         }
     
         friend std::ostream& operator<<(std::ostream& os, const timeOfDay& t)
-        {   //print(std::cout) --> os, t. 
-            //if(t.hour < 10) os <<"0"; 
+        {   
             os.width(2); os.fill('0');
             os << t.hour << ":";
-            os << std::setw(2) << std::setfill('0') <<t.minute;
-            //if(t.minute < 10) os <<"0"; 
-        
-            
+            os << std::setw(2) << std::setfill('0') <<t.minute;       
             return os;
         }
     
