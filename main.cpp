@@ -38,12 +38,13 @@ namespace JeongYoonha2449101
     void parsingAlarm(std::iostream& io)
     {
         alarm a;
-        io >> a; //alarm's input dustkswk
+
         
-        std::streambuf* origBuf{std::cout.rdbuf()};
-        
+        std::streambuf* origBuf{std::cout.rdbuf()};     
         std::cout.rdbuf(nullptr);
-        
+
+        io >> a; //alarm's input dustkswk        
+
         std::cout.rdbuf(origBuf);
 
         io.clear();
